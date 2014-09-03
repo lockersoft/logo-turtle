@@ -94,4 +94,16 @@ describe Robot do
     end
   end
 
+  describe '#report' do
+    it "prints robot's position to STDOUT" do
+      position = double 'Position'
+      output = 'output'
+
+      expect(robot).to receive(:position).and_return position
+      expect(position).to receive(:to_s).and_return output
+
+      expect { robot.report }.to output("#{ output }\n").to_stdout
+    end
+  end
+
 end

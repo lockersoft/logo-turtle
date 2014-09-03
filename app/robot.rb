@@ -36,6 +36,10 @@ class Robot
     placed
   end
 
+  def report
+    $stdout.puts position.to_s
+  end
+
   private
 
   attr_reader :board, :placed
