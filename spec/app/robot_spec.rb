@@ -4,12 +4,17 @@ describe Robot do
 
   let(:board) { instance_double Board }
   let(:robot) { Robot.new board }
+  let(:position) { Position[0, 0, 'SOUTH'] }
+
+  it 'ignores #move command if it is not placed' do
+    expect(robot).not_to be_placed
+
+    expect(robot.move).to be_falsey
+  end
 
   describe '#place' do
     context 'when position coordinates are valid' do
       it 'places the robot on the board at the specified position' do
-        position = Position[0, 0, 'SOUTH']
-
         expect(board).to receive(:valid_position?).with(position).and_return true
 
         robot.place(position)
@@ -17,18 +22,21 @@ describe Robot do
         expect(robot).to be_placed
       end
     end
+
+    context 'when position coordinates are invalid' do
+      it 'does not place the robot on the board' do
+        expect(board).to receive(:valid_position?).with(position).and_return false
+
+        robot.place(position)
+
+        expect(robot).not_to be_placed
+      end
+    end
   end
 
   describe '#move' do
-    it 'does not move the robot if it is not placed' do
-      expect(robot).not_to be_placed
-      expect(robot.move).to be_falsey
-    end
-
     context 'when it is placed' do
       before do
-        position = Position[0, 0, 'EAST']
-
         expect(board).to receive(:valid_position?).and_return true
 
         robot.place(position)
