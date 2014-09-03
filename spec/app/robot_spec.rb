@@ -6,10 +6,12 @@ describe Robot do
   let(:robot) { Robot.new board }
   let(:position) { Position[0, 0, 'SOUTH'] }
 
-  it 'ignores #move command if it is not placed' do
+  it 'ignores any commands if it is not placed' do
     expect(robot).not_to be_placed
 
     expect(robot.move).to be_falsey
+    expect(robot.left).to be_falsey
+    expect(robot.right).to be_falsey
   end
 
   describe '#place' do
@@ -34,14 +36,14 @@ describe Robot do
     end
   end
 
-  describe '#move' do
-    context 'when it is placed' do
-      before do
-        expect(board).to receive(:valid_position?).and_return true
+  context 'movement and turning methods' do
+    before do
+      expect(board).to receive(:valid_position?).and_return true
 
-        robot.place(position)
-      end
+      robot.place(position)
+    end
 
+    describe '#move' do
       it 'moves the robot to a new valid position' do
         expect(board).to receive(:valid_position?).and_return true
 
@@ -52,6 +54,28 @@ describe Robot do
         expect(board).to receive(:valid_position?).and_return false
 
         expect { robot.move }.not_to change { robot.position }
+      end
+    end
+
+    describe '#left' do
+      it 'turns robot left' do
+        directions = instance_double Directions
+
+        expect(robot).to receive(:directions).and_return directions
+        expect(directions).to receive(:left).and_return 'EAST'
+
+        expect { robot.left }.to change { robot.position.direction }
+      end
+    end
+
+    describe '#right' do
+      it 'turns robot right' do
+        directions = instance_double Directions
+
+        expect(robot).to receive(:directions).and_return directions
+        expect(directions).to receive(:right).and_return 'WEST'
+
+        expect { robot.right }.to change { robot.position.direction }
       end
     end
   end

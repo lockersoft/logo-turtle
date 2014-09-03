@@ -20,6 +20,18 @@ class Robot
     @position = movement_position
   end
 
+  def left
+    return unless placed?
+
+    @position = left_turning_position
+  end
+
+  def right
+    return unless placed?
+
+    @position = right_turning_position
+  end
+
   def placed?
     placed
   end
@@ -64,6 +76,26 @@ class Robot
     else
       0
     end
+  end
+
+  def left_turning_position
+    Position[position.x, position.y, left_turning_direction]
+  end
+
+  def right_turning_position
+    Position[position.x, position.y, right_turning_direction]
+  end
+
+  def left_turning_direction
+    directions.left(position.direction)
+  end
+
+  def right_turning_direction
+    directions.right(position.direction)
+  end
+
+  def directions
+    Directions.new
   end
 
 end
