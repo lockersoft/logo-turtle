@@ -5,8 +5,8 @@ class Board
   DIRECTIONS = %w(NORTH EAST SOUTH WEST)
 
   def valid_position?(position)
-    position.x >= 0 && position.x <= WIDTH &&
-      position.y >= 0 && position.y <= HEIGHT &&
+    position.x >= 0 && position.x < WIDTH &&
+      position.y >= 0 && position.y < HEIGHT &&
       DIRECTIONS.include?(position.direction)
   end
 

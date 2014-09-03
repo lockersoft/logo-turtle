@@ -32,7 +32,7 @@ describe Board do
     end
 
     it "returns falsey value if provided position exceeds board's width" do
-      position = Position[Board::WIDTH + 1, 0, 'SOUTH']
+      position = Position[Board::WIDTH, 0, 'SOUTH']
 
       result = board.valid_position?(position)
 
@@ -40,7 +40,7 @@ describe Board do
     end
 
     it "returns falsey value if provided position exceeds board's height" do
-      position = Position[0, Board::HEIGHT + 1, 'SOUTH']
+      position = Position[0, Board::HEIGHT, 'SOUTH']
 
       result = board.valid_position?(position)
 
