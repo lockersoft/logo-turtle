@@ -20,13 +20,13 @@ describe Board do
     end
   end
 
-  describe '#place' do
+  describe '#valid_position?' do
     let(:board) { Board.new }
 
     it 'returns truthy value if provided position is valid' do
       position = Position[0, 0, 'SOUTH']
 
-      result = board.place(position)
+      result = board.valid_position?(position)
 
       expect(result).to be_truthy
     end
@@ -34,7 +34,7 @@ describe Board do
     it "returns falsey value if provided position exceeds board's width" do
       position = Position[Board::WIDTH + 1, 0, 'SOUTH']
 
-      result = board.place(position)
+      result = board.valid_position?(position)
 
       expect(result).to be_falsey
     end
@@ -42,7 +42,7 @@ describe Board do
     it "returns falsey value if provided position exceeds board's height" do
       position = Position[0, Board::HEIGHT + 1, 'SOUTH']
 
-      result = board.place(position)
+      result = board.valid_position?(position)
 
       expect(result).to be_falsey
     end
@@ -50,7 +50,7 @@ describe Board do
     it "returns falsey value if provided position's direction is invalid" do
       position = Position[0, 0, 'gibberish']
 
-      result = board.place(position)
+      result = board.valid_position?(position)
 
       expect(result).to be_falsey
     end
