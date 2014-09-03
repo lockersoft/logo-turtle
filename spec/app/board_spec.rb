@@ -14,12 +14,6 @@ describe Board do
     end
   end
 
-  describe 'DIRECTIONS class constant' do
-    it 'is an Array with all possible directions' do
-      expect(Board::DIRECTIONS).to be_an Array
-    end
-  end
-
   describe '#valid_position?' do
     let(:board) { Board.new }
 
