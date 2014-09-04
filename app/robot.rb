@@ -37,6 +37,8 @@ class Robot
   end
 
   def report
+    return unless placed?
+
     $stdout.puts position.to_s
   end
 

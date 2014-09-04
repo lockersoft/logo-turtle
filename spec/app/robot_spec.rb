@@ -6,12 +6,18 @@ describe Robot do
   let(:robot) { Robot.new board }
   let(:position) { Position[0, 0, 'SOUTH'] }
 
-  it 'ignores any commands if it is not placed' do
+  it 'ignores any movement/turning commands if it is not placed' do
     expect(robot).not_to be_placed
 
     expect(robot.move).to be_falsey
     expect(robot.left).to be_falsey
     expect(robot.right).to be_falsey
+  end
+
+  it 'does not report anything if it is not placed' do
+    expect(robot).not_to be_placed
+
+    expect { robot.report }.not_to output.to_stdout
   end
 
   describe '#place' do
@@ -99,6 +105,7 @@ describe Robot do
       position = double 'Position'
       output = 'output'
 
+      expect(robot).to receive(:placed?).and_return true
       expect(robot).to receive(:position).and_return position
       expect(position).to receive(:to_s).and_return output
 
