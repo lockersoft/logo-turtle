@@ -3,7 +3,7 @@
 This Ruby application is a simple implementation of a
 [Logo turtle](http://en.wikipedia.org/wiki/Turtle_graphics).
 
-Incidentally it's also called a 'Toy robot simulator'.
+Incidentally, it's also called a 'Toy robot simulator'.
 
 The robot/turtle accepts the following commands: `PLACE`,
 `MOVE`, `LEFT`, `RIGHT` and `REPORT`.
@@ -25,7 +25,7 @@ ruby runner.rb
 or with file input:
 
 ```bash
-ruby runner.rb < commands.txt>
+ruby runner.rb < commands.txt
 ```
 
 
